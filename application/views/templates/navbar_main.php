@@ -17,7 +17,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#" class="display-tooltip" style="color: #FFF;" >Hello <?php echo $name ?>!</a></li>
-                <li><a href="<?php echo base_url('index.php/dashboard/logout'); ?>" title="Logout"><span class="glyphicon glyphicon-off" aria-hidden="true"></span></a></li>
+                <li><a href="<?php echo base_url('index.php/dashboard/logout'); ?>" title="Logout"><span class="glyphicon fa fa-sign-out" aria-hidden="true"></span></a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
