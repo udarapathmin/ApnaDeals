@@ -4,7 +4,7 @@ class User_Auth extends CI_Controller {
 
     function __construct() {
         parent::__construct();
-        $this->load->model('user', '', TRUE);
+        $this->load->model('User_Model', '', TRUE);
     }
 
     function index() {
@@ -24,7 +24,7 @@ class User_Auth extends CI_Controller {
 
     function authenticate($password) {
         $username = $this->input->post('username');
-        $result = $this->user->login($username, $password);
+        $result = $this->User_Model->login($username, $password);
 
         if ($result) {
             $sess_array = array();

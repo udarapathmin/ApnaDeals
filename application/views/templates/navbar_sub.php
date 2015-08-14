@@ -5,14 +5,14 @@
         <li <?php if($navbar == 'dashboard'){ echo "class='active'";} ?> ><a href="<?php echo base_url('index.php/dashboard'); ?>"><i class="fa fa-home fa-2x"></i><span>Dashboard</span> </a> </li>
       	<li class="dropdown <?php if($navbar == 'user'){ echo "active";} ?>"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"  ><i class="fa fa-users fa-2x"></i><span>Users</span>
           <ul class="dropdown-menu">
-            <li><a href="#">List Users</a></li>
-            <li><a href="#">Add User</a></li>
+            <li><a href="<?php echo base_url('index.php/user/ListUsers'); ?>">List Users</a></li>
+            <li><a href="<?php echo base_url('index.php/user/AddUser'); ?>">Add User</a></li>
           </ul>
         </li>
         <li class="dropdown <?php if($navbar == 'category'){ echo "active";} ?>"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"  ><i class="fa fa-th-list fa-2x"></i><span>Category</span>
           <ul class="dropdown-menu">
-            <li><a href="#">List Categories</a></li>
-            <li><a href="#">Add Category</a></li>
+            <li><a href="<?php echo base_url('index.php/category/ListCategory'); ?>">List Categories</a></li>
+            <li><a href="<?php echo base_url('index.php/category/AddCategory'); ?>">Add Category</a></li>
           </ul>
         </li>
          <li class="dropdown <?php if($navbar == 'deals'){ echo "active";} ?>"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" ><i class="glyphicon glyphicon-list-alt"></i><span>Deals</span>
@@ -29,8 +29,8 @@
         </li>
       	<li class="dropdown <?php if($navbar == 'city'){ echo "active";} ?>"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-taxi fa-2x"></i><span>City</span>
           <ul class="dropdown-menu">
-            <li><a href="#">List Cities</a></li>
-            <li><a href="#">Add City</a></li>
+            <li><a href="<?php echo base_url('index.php/city/ListCity'); ?>">List Cities</a></li>
+            <li><a href="<?php echo base_url('index.php/category/AddCity'); ?>">Add City</a></li>
           </ul>
         </li>
         <li class="dropdown <?php if($navbar == 'states'){ echo "active";} ?>"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-university fa-2x"></i><span>States</span>
