@@ -308,5 +308,19 @@ class User_model extends CI_Model {
             return FALSE;
         }
     }
+
+    //Deal Functions
+    public function listdeals(){
+        $this->db->select('*');
+        $this->db->from('deals');
+        $this->db->order_by("updated", "desc"); 
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return FALSE;
+        }
+    }
 }
     

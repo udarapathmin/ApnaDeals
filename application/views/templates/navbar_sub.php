@@ -17,9 +17,9 @@
         </li>
          <li class="dropdown <?php if($navbar == 'deals'){ echo "active";} ?>"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" ><i class="glyphicon glyphicon-list-alt"></i><span>Deals</span>
           <ul class="dropdown-menu">
-            <li><a href="#">List Deals</a></li>
-            <li><a href="#">Add Deal</a></li>
-            <li><a href="#">Set Daily Deal</a></li>
+            <li><a href="<?php echo base_url('index.php/deal/ListDeal'); ?>">List Deals</a></li>
+            <li><a href="<?php echo base_url('index.php/deal/ListCategory'); ?>">Add Deal</a></li>
+            <li><a href="<?php echo base_url('index.php/deal/ListCategory'); ?>">Set Daily Deal</a></li>
           </ul>
          </li>
       	<li class="dropdown <?php if($navbar == 'city'){ echo "active";} ?>"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-taxi fa-2x"></i><span>City</span>
@@ -36,8 +36,8 @@
         </li>
       	<li class="dropdown <?php if($navbar == 'pages'){ echo "active";} ?>"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-file fa-2x"></i><span>Pages</span>
           <ul class="dropdown-menu">
-            <li><a href="#">List Pages</a></li>
-            <li><a href="#">Add Page</a></li>
+            <li><a href="<?php echo base_url('index.php/page/ListPage'); ?>">List Pages</a></li>
+            <!-- <li><a href="#">Add Page</a></li> -->
           </ul>
         </li>
         <li class="dropdown <?php if($navbar == 'flyers'){ echo "active";} ?>"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-picture-o fa-2x"></i><span>Flyers</span>
