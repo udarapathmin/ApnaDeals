@@ -40,7 +40,7 @@
                             echo "<td>".$row->email."</td>" . PHP_EOL;
                             echo "<td>" . PHP_EOL; ?>
                            <a href='<?php echo base_url('index.php/user/ViewUser/'.$row->id); ?>' class='btn btn-primary btn-xs'><i class="fa fa-list-alt"></i></a>
-                           <a href='<?php echo base_url('index.php/user/'.$row->id); ?>' class='btn btn-primary btn-xs'><i class="fa fa-pencil-square-o"></i></a>
+                           <a href='<?php echo base_url('index.php/user/EditUser/'.$row->id); ?>' class='btn btn-primary btn-xs'><i class="fa fa-pencil-square-o"></i></a>
                            <a href='<?php echo base_url('index.php/user/DeleteUser/'.$row->id); ?>' class='btn btn-danger btn-xs' onclick="return confirm('Are you sure you want to permenantly delete this user?   you cannot recover this user profile after you delete');"><i class="fa fa-trash-o"></i></a>
                         <?php
                             echo "</td>" . PHP_EOL;

@@ -76,6 +76,39 @@ class User_model extends CI_Model {
         }
     }
 
+    function viewuserarray($id){
+        try{
+            $query = $this->db->query("SELECT * FROM users WHERE id='$id' LIMIT 1");
+            if ($query->num_rows() > 0)
+            {
+                $ret_array = array();
+               foreach ($query->result() as $row)
+               {
+                  $ret_array['username'] = $row->username; 
+                  $ret_array['password'] = $row->password; 
+                  $ret_array['email'] = $row->email; 
+                  $ret_array['name'] = $row->name; 
+                  $ret_array['last_name'] = $row->last_name; 
+               }
+
+               return $ret_array;
+            } else{
+                return FALSE;
+            }
+        } catch (Exception $ex) {
+            return FALSE;
+        }
+    }
+
+    function updateuser($data,$id){
+        $this->db->where('id', $id);
+        if ($this->db->update('users', $data)) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+
     //Category Functions
     public function listcategories(){
         $this->db->select('*');
@@ -113,6 +146,25 @@ class User_model extends CI_Model {
             );
 
         if ($this->db->delete('categories', $data)) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+
+    function viewcategory($id){
+        try{
+            $query = $this->db->query("SELECT name FROM categories WHERE id='$id' LIMIT 1");
+            $row = $query->row();
+            return $row->name;
+        } catch (Exception $ex) {
+            return FALSE;
+        }
+    }
+
+    function updatecategory($data,$id){
+        $this->db->where('id', $id);
+        if ($this->db->update('categories', $data)) {
             return TRUE;
         } else {
             return FALSE;
@@ -163,6 +215,37 @@ class User_model extends CI_Model {
         }
     }
 
+    function viewcity($id){
+        try{
+            $query = $this->db->query("SELECT * FROM cities WHERE id='$id' LIMIT 1");
+            if ($query->num_rows() > 0)
+            {
+                $ret_array = array();
+               foreach ($query->result() as $row)
+               {
+                  $ret_array['name'] = $row->name; 
+                  $ret_array['pin'] = $row->pin; 
+                  $ret_array['region'] = $row->region; 
+               }
+
+               return $ret_array;
+            } else{
+                return FALSE;
+            }
+        } catch (Exception $ex) {
+            return FALSE;
+        }
+    }
+
+    function updatecity($data,$id){
+        $this->db->where('id', $id);
+        if ($this->db->update('cities', $data)) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+
     //State Functions
     public function liststates(){
         $this->db->select('*');
@@ -201,6 +284,25 @@ class User_model extends CI_Model {
             );
 
         if ($this->db->delete('states', $data)) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+
+    function viewstate($id){
+        try{
+            $query = $this->db->query("SELECT name FROM states WHERE id='$id' LIMIT 1");
+            $row = $query->row();
+            return $row->name;
+        } catch (Exception $ex) {
+            return FALSE;
+        }
+    }
+
+    function updatestate($data,$id){
+        $this->db->where('id', $id);
+        if ($this->db->update('states', $data)) {
             return TRUE;
         } else {
             return FALSE;

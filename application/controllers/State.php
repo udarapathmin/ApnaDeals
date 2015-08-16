@@ -87,6 +87,57 @@ class State extends CI_Controller {
         }
     }
 
+    function EditState($id) {
+        if (!$this->session->userdata('logged_in')) {
+            redirect('login', 'refresh');
+        }
+
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('state', 'state', "trim|required|xss_clean");
+
+        $data['navbar'] = "states";
+
+        $data['page_title'] = 'Edit State';
+        $data['name'] = $this->session->userdata('name');
+
+        //Send Cuurent Values
+        $data['statedet'] = $this->User_Model->viewstate($id);
+        $data['sid'] = $id;
+
+        //Run form validation
+        if ($this->form_validation->run() == FALSE) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar_main', $data);
+            $this->load->view('templates/navbar_sub', $data);
+            $this->load->view('state/editstate');
+            $this->load->view('templates/footer');
+        } else{
+            $state_data = array(
+                'name' => $this->input->post('state')
+            );
+
+            //calling model
+            if($this->User_Model->updatestate($state_data,$id)){
+                //Success Message
+                $data['succ_message'] = 'Successfully Edited State';
+                $data['statedet'] = $this->User_Model->viewstate($id);
+                $this->load->view('templates/header', $data);
+                $this->load->view('templates/navbar_main', $data);
+                $this->load->view('templates/navbar_sub', $data);
+                $this->load->view('state/editstate');
+                $this->load->view('templates/footer');
+            } else{
+                $data['error_message'] = 'Failed to Edit State';
+                $data['statedet'] = $this->User_Model->viewstate($id);
+                $this->load->view('templates/header', $data);
+                $this->load->view('templates/navbar_main', $data);
+                $this->load->view('templates/navbar_sub', $data);
+                $this->load->view('state/editstate');
+                $this->load->view('templates/footer');                
+            }
+        }
+    }
+
     function DeleteState($id) {
         if (!$this->session->userdata('logged_in')) {
             redirect('login', 'refresh');

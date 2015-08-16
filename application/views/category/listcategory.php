@@ -34,7 +34,7 @@
                             echo "<td>".$row->updated."</td>" . PHP_EOL;
                             echo "<td>" . PHP_EOL; ?>
 
-                           <a href='<?php echo base_url('index.php/user/'.$row->id); ?>' class='btn btn-primary btn-xs'><i class="fa fa-pencil-square-o"></i></a>
+                           <a href='<?php echo base_url('index.php/category/EditCategory/'.$row->id); ?>' class='btn btn-primary btn-xs'><i class="fa fa-pencil-square-o"></i></a>
                            <a href='<?php echo base_url('index.php/category/DeleteCategory/'.$row->id); ?>' class='btn btn-danger btn-xs' onclick="return confirm('Are you sure you want to permenantly delete this category?   you cannot recover this after you delete');"><i class="fa fa-trash-o"></i></a>
                         <?php
                             echo "</td>" . PHP_EOL;

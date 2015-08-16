@@ -144,4 +144,68 @@ class User extends CI_Controller {
             }
     }
 
+    function EditUser($id) {
+        if (!$this->session->userdata('logged_in')) {
+            redirect('login', 'refresh');
+        }
+
+        if (!isset($id)) {
+            redirect('dashboard');
+        }
+
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('username', 'username', "trim|required|xss_clean|min_length[5]|alpha_dash");
+        $this->form_validation->set_rules('email', 'email', "trim|required|xss_clean|valid_email");
+        $this->form_validation->set_rules('firstname', 'first name', "trim|required|xss_clean|alpha");
+        $this->form_validation->set_rules('lastname', 'last name', "trim|required|xss_clean|alpha");
+        $this->form_validation->set_rules('password', 'password', "trim|required|xss_clean");
+        $this->form_validation->set_rules('cpassword', 'confirm password', "required|xss_clean|matches[password]");
+
+        $data['navbar'] = "user";
+
+        $data['page_title'] = 'Edit User';
+        $data['name'] = $this->session->userdata('name');
+
+        //Send Cuurent Values
+        $data['userdet'] = $this->User_Model->viewuserarray($id);
+        $data['uid'] = $id;
+
+        //Run form validation
+        if ($this->form_validation->run() == FALSE) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar_main', $data);
+            $this->load->view('templates/navbar_sub', $data);
+            $this->load->view('user/edituser');
+            $this->load->view('templates/footer');
+        } else{
+            $user_data = array(
+                'email' => $this->input->post('email'),
+                'name' => $this->input->post('firstname'),
+                'last_name' => $this->input->post('lastname'),
+                'password' => md5($this->input->post('password')),
+                'updated' => date('Y-m-d h:i:s a', time())
+            );
+
+            //calling model
+            if($this->User_Model->updateuser($user_data,$id)){
+                //Success Message
+                $data['succ_message'] = 'Successfully Edit User';
+                $data['userdet'] = $this->User_Model->viewuserarray($id);
+                $this->load->view('templates/header', $data);
+                $this->load->view('templates/navbar_main', $data);
+                $this->load->view('templates/navbar_sub', $data);
+                $this->load->view('user/edituser');
+                $this->load->view('templates/footer');
+            } else{
+                $data['error_message'] = 'Failed to Edit User';
+                $data['userdet'] = $this->User_Model->viewuserarray($id);
+                $this->load->view('templates/header', $data);
+                $this->load->view('templates/navbar_main', $data);
+                $this->load->view('templates/navbar_sub', $data);
+                $this->load->view('user/edituser');
+                $this->load->view('templates/footer');                
+            }
+        }
+    }
+
 }

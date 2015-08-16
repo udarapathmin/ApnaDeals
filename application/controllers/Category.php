@@ -78,7 +78,7 @@ class Category extends CI_Controller {
                 $this->load->view('category/addcategory');
                 $this->load->view('templates/footer');
             } else{
-                $data['error_message'] = 'Failed to Add New Categpry, Category may have already exists';
+                $data['error_message'] = 'Failed to Add New Category, Category may have already exists';
 
                 $this->load->view('templates/header', $data);
                 $this->load->view('templates/navbar_main', $data);
@@ -98,6 +98,63 @@ class Category extends CI_Controller {
                 redirect('category/listcategory', 'refresh');
         } else{
             redirect('category/listcategory', 'refresh');               
+        }
+    }
+
+    function EditCategory($id) {
+        if (!$this->session->userdata('logged_in')) {
+            redirect('login', 'refresh');
+        }
+
+        if (!isset($id)) {
+            redirect('dashboard');
+        }
+
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('category', 'category', "trim|required|xss_clean");
+        
+
+        $data['navbar'] = "category";
+
+        $data['page_title'] = 'Edit Category';
+        $data['name'] = $this->session->userdata('name');
+
+        //Send Cuurent Values
+        $data['categorydet'] = $this->User_Model->viewcategory($id);
+        $data['catid'] = $id;
+
+        //Run form validation
+        if ($this->form_validation->run() == FALSE) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar_main', $data);
+            $this->load->view('templates/navbar_sub', $data);
+            $this->load->view('category/editcategory');
+            $this->load->view('templates/footer');
+        } else{
+            $category_data = array(
+                'name' => $this->input->post('category'),
+                'updated' => date('Y-m-d h:i:s a', time())
+            );
+
+            //calling model
+            if($this->User_Model->updatecategory($category_data, $id)){
+                //Success Message
+                $data['succ_message'] = 'Successfully Edit Category';
+                $data['categorydet'] = $this->User_Model->viewcategory($id);
+                $this->load->view('templates/header', $data);
+                $this->load->view('templates/navbar_main', $data);
+                $this->load->view('templates/navbar_sub', $data);
+                $this->load->view('category/editcategory');
+                $this->load->view('templates/footer');
+            } else{
+                $data['error_message'] = 'Failed to Edit Category';
+                $data['categorydet'] = $this->User_Model->viewcategory($id);
+                $this->load->view('templates/header', $data);
+                $this->load->view('templates/navbar_main', $data);
+                $this->load->view('templates/navbar_sub', $data);
+                $this->load->view('category/editcategory');
+                $this->load->view('templates/footer');                
+            }
         }
     }
 
