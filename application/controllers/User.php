@@ -80,14 +80,13 @@ class User extends CI_Controller {
             if($this->User_Model->adduser($user_data)){
                 //Success Message
                 $data['succ_message'] = 'Successfully Added New User';
-                $data['arr'] = $user_data;
                 $this->load->view('templates/header', $data);
                 $this->load->view('templates/navbar_main', $data);
                 $this->load->view('templates/navbar_sub', $data);
                 $this->load->view('user/adduser');
                 $this->load->view('templates/footer');
             } else{
-                $data['error_message'] = 'Failed to Add New User';
+                $data['error_message'] = 'Failed to Add New User, Username or Email already exists';
 
                 $this->load->view('templates/header', $data);
                 $this->load->view('templates/navbar_main', $data);
@@ -96,6 +95,53 @@ class User extends CI_Controller {
                 $this->load->view('templates/footer');                
             }
         }
+    }
+
+    function ViewUser($id) {
+        if (!$this->session->userdata('logged_in')) {
+            redirect('login', 'refresh');
+        }
+
+        $data['navbar'] = "user";
+
+        $data['page_title'] = 'View User';
+        $data['name'] = $this->session->userdata('name');
+        
+        if($this->User_Model->viewuser($id)){
+                //Call the model to get users list
+                $data['user'] = $this->User_Model->viewuser($id);
+
+                $this->load->view('templates/header', $data);
+                $this->load->view('templates/navbar_main', $data);
+                $this->load->view('templates/navbar_sub', $data);
+                $this->load->view('user/viewuser');
+                $this->load->view('templates/footer');
+            } else{
+                $data['error_message'] = 'No user found';
+
+                $this->load->view('templates/header', $data);
+                $this->load->view('templates/navbar_main', $data);
+                $this->load->view('templates/navbar_sub', $data);
+                $this->load->view('user/viewuser');
+                $this->load->view('templates/footer');                
+            }
+    }
+
+    function DeleteUser($id) {
+        if (!$this->session->userdata('logged_in')) {
+            redirect('login', 'refresh');
+        }
+
+        $data['navbar'] = "user";
+
+        $data['page_title'] = 'Delete User';
+        $data['name'] = $this->session->userdata('name');
+        
+        if($this->User_Model->deleteuser($id)){
+                redirect('user/ListUsers', 'refresh');
+            } else{
+                redirect('user/ListUsers', 'refresh');               
+            }
     }
 
 }

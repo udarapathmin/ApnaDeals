@@ -19,24 +19,19 @@
           <ul class="dropdown-menu">
             <li><a href="#">List Deals</a></li>
             <li><a href="#">Add Deal</a></li>
+            <li><a href="#">Set Daily Deal</a></li>
           </ul>
          </li>
-        <li class="dropdown <?php if($navbar == 'stores'){ echo "active";} ?>"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-building fa-2x"></i><span>Stores</span>
-          <ul class="dropdown-menu">
-            <li><a href="#">List Stores</a></li>
-            <li><a href="#">Add Store</a></li>
-          </ul>
-        </li>
       	<li class="dropdown <?php if($navbar == 'city'){ echo "active";} ?>"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-taxi fa-2x"></i><span>City</span>
           <ul class="dropdown-menu">
             <li><a href="<?php echo base_url('index.php/city/ListCity'); ?>">List Cities</a></li>
-            <li><a href="<?php echo base_url('index.php/category/AddCity'); ?>">Add City</a></li>
+            <li><a href="<?php echo base_url('index.php/city/AddCity'); ?>">Add City</a></li>
           </ul>
         </li>
         <li class="dropdown <?php if($navbar == 'states'){ echo "active";} ?>"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-university fa-2x"></i><span>States</span>
           <ul class="dropdown-menu">
-            <li><a href="#">List States</a></li>
-            <li><a href="#">Add State</a></li>
+            <li><a href="<?php echo base_url('index.php/state/ListState'); ?>">List States</a></li>
+            <li><a href="<?php echo base_url('index.php/state/AddState'); ?>">Add State</a></li>
           </ul>
         </li>
       	<li class="dropdown <?php if($navbar == 'pages'){ echo "active";} ?>"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-file fa-2x"></i><span>Pages</span>

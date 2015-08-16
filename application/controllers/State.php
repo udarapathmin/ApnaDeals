@@ -1,6 +1,6 @@
 <?php
 
-class Category extends CI_Controller {
+class State extends CI_Controller {
 
     function __construct() {
         parent::__construct();
@@ -23,81 +23,79 @@ class Category extends CI_Controller {
         $this->load->view('templates/footer');
     }
 
-    function ListCategory() {
+    function ListState() {
         if (!$this->session->userdata('logged_in')) {
             redirect('login', 'refresh');
         }
 
-        $data['navbar'] = "category";
+        $data['navbar'] = "states";
 
-        $data['page_title'] = 'List Categories';
+        $data['page_title'] = 'List States';
         $data['name'] = $this->session->userdata('name');
         //Call the model to get users list
-        $data['category'] = $this->User_Model->listcategories();
+        $data['states'] = $this->User_Model->liststates();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar_main', $data);
         $this->load->view('templates/navbar_sub', $data);
-        $this->load->view('category/listcategory');
+        $this->load->view('state/liststates');
         $this->load->view('templates/footer');
     }
 
-    function AddCategory() {
+    function AddState() {
         if (!$this->session->userdata('logged_in')) {
             redirect('login', 'refresh');
         }
 
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('category', 'category', "trim|required|xss_clean");
-        
+        $this->form_validation->set_rules('state', 'state', "trim|required|xss_clean");
 
-        $data['navbar'] = "category";
+        $data['navbar'] = "states";
 
-        $data['page_title'] = 'Add Category';
+        $data['page_title'] = 'Add State';
         $data['name'] = $this->session->userdata('name');
         //Run form validation
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar_main', $data);
             $this->load->view('templates/navbar_sub', $data);
-            $this->load->view('category/addcategory');
+            $this->load->view('state/addstate');
             $this->load->view('templates/footer');
         } else{
-            $category_data = array(
-                'name' => $this->input->post('category'),
-                'updated' => date('Y-m-d h:i:s a', time())
+            $state_data = array(
+                'name' => $this->input->post('state')
             );
 
             //calling model
-            if($this->User_Model->addcategory($category_data)){
+            if($this->User_Model->addstate($state_data)){
                 //Success Message
-                $data['succ_message'] = 'Successfully Added New Category';
+                $data['succ_message'] = 'Successfully Added New State';
                 $this->load->view('templates/header', $data);
                 $this->load->view('templates/navbar_main', $data);
                 $this->load->view('templates/navbar_sub', $data);
-                $this->load->view('category/addcategory');
+                $this->load->view('state/addstate');
                 $this->load->view('templates/footer');
             } else{
-                $data['error_message'] = 'Failed to Add New Categpry, Category may have already exists';
+                $data['error_message'] = 'Failed to Add New State, State may have already exists';
 
                 $this->load->view('templates/header', $data);
                 $this->load->view('templates/navbar_main', $data);
                 $this->load->view('templates/navbar_sub', $data);
-                $this->load->view('category/addcategory');
+                $this->load->view('state/addstate');
                 $this->load->view('templates/footer');                
             }
         }
     }
 
-    function DeleteCategory($id) {
+    function DeleteState($id) {
         if (!$this->session->userdata('logged_in')) {
             redirect('login', 'refresh');
         }
         
-        if($this->User_Model->deletecategory($id)){
-                redirect('category/listcategory', 'refresh');
+        if($this->User_Model->deletestate($id)){
+                redirect('state/ListState', 'refresh');
         } else{
-            redirect('category/listcategory', 'refresh');               
+            redirect('state/ListState', 'refresh');               
         }
     }
 

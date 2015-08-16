@@ -1,7 +1,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
-			<h3><i class="fa fa-users"></i> Add User</h3><hr>
+			<h3><i class="fa fa-taxi"></i> Add City</h3><hr>
 		</div>
 	</div>
     <div class="row">
@@ -28,33 +28,20 @@
     </div>
 	<div class="row">
 		<div class="col-md-6">
-			<?php echo form_open('user/AddUser'); ?>
+			<?php echo form_open('city/AddCity'); ?>
               <div class="form-group">
-                <label>Email address</label>
-                <input type="email" class="form-control" name="email" placeholder="Email">
+                <label>Name</label>
+                <input type="text" class="form-control" name="name" placeholder="Name">
+              </div>  
+              <div class="form-group">
+                <label>Pin</label>
+                <input type="text" class="form-control" name="pin" placeholder="Pin">
               </div>
               <div class="form-group">
-                <label>First Name</label>
-                <input type="text" class="form-control" name="firstname" placeholder="First Name">
-              </div>
-              <div class="form-group">
-                <label>Last Name</label>
-                <input type="text" class="form-control" name="lastname" placeholder="Last Name">
-              </div>
-              <div class="form-group">
-                <label>Username</label>
-                <input type="text" class="form-control" name="username" placeholder="Username">
-              </div>
-              <div class="form-group">
-                <label>Password</label>
-                <input type="password" class="form-control" name="password" placeholder="Password">
-              </div>
-              <div class="form-group">
-                <label>Confirm Password</label>
-                <input type="password" class="form-control" name="cpassword" placeholder="Confirm Password">
-              </div>
-             
-              <button type="submit" class="btn btn-success">Add User</button>
+                <label>Region</label>
+                <input type="text" class="form-control" name="region" placeholder="Region">
+              </div>           
+              <button type="submit" class="btn btn-success">Add City</button>
             <?php echo form_close(); ?>
 		</div>
 	

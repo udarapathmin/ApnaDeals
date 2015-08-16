@@ -13,7 +13,7 @@
                 <center><strong>APNADEALS MANAGEMENT</strong></center>
             </div>
             <div class="panel-body">
-                <?php echo form_open('user_auth'); ?>
+                <?php echo form_open('User_Auth'); ?>
                 <fieldset>
                     <div class="row">
                         <div class="center-block">
