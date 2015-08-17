@@ -50,18 +50,16 @@ class Page extends CI_Controller {
         }
 
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('name', 'name', "trim|required|xss_clean");
-        $this->form_validation->set_rules('pin', 'pin', "trim|required|xss_clean");
-        $this->form_validation->set_rules('region', 'region', "trim|required|xss_clean");
+        $this->form_validation->set_rules('content', 'content', "trim|required");
 
-        $data['navbar'] = "city";
+        $data['navbar'] = "pages";
 
-        $data['page_title'] = 'Edit City';
+        $data['page_title'] = 'Edit Page';
         $data['name'] = $this->session->userdata('name');
 
         //Send Cuurent Values
-        $data['citydet'] = $this->User_Model->viewcity($id);
-        $data['cityid'] = $id;
+        $data['pageinfo'] = $this->User_Model->viwpage($id);
+        $data['pid'] = $id;
 
         //Run form validation
         if ($this->form_validation->run() == FALSE) {
@@ -71,25 +69,24 @@ class Page extends CI_Controller {
             $this->load->view('page/editpage');
             $this->load->view('templates/footer');
         } else{
-            $city_data = array(
-                'name' => $this->input->post('name'),
-                'pin' => $this->input->post('pin'),
-                'region' => $this->input->post('region')
+            $page_data = array(
+                'content' => $this->input->post('content'),
+                'updated' => date('Y-m-d h:i:s a', time())
             );
 
             //calling model
-            if($this->User_Model->updatecity($city_data, $id)){
+            if($this->User_Model->updatepage($page_data, $id)){
                 //Success Message
-                $data['succ_message'] = 'Successfully Edited City';
-                $data['citydet'] = $this->User_Model->viewcity($id);
+                $data['succ_message'] = 'Successfully Edited Page';
+                $data['pageinfo'] = $this->User_Model->viwpage($id);
                 $this->load->view('templates/header', $data);
                 $this->load->view('templates/navbar_main', $data);
                 $this->load->view('templates/navbar_sub', $data);
                 $this->load->view('page/editpage');
                 $this->load->view('templates/footer');
             } else{
-                $data['error_message'] = 'Failed to Edit City, City may have already exists';
-                $data['citydet'] = $this->User_Model->viewcity($id);
+                $data['error_message'] = 'Failed to Edit Page';
+                $data['pageinfo'] = $this->User_Model->viwpage($id);
                 $this->load->view('templates/header', $data);
                 $this->load->view('templates/navbar_main', $data);
                 $this->load->view('templates/navbar_sub', $data);

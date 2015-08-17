@@ -322,5 +322,37 @@ class User_model extends CI_Model {
             return FALSE;
         }
     }
+
+    //Page Functions
+    function viwpage($id){
+        try{
+            $query = $this->db->query("SELECT * FROM static_pages WHERE id='$id' LIMIT 1");
+            if ($query->num_rows() > 0)
+            {
+                $ret_array = array();
+               foreach ($query->result() as $row)
+               {
+                  $ret_array['name'] = $row->name; 
+                  $ret_array['content'] = $row->content; 
+                  $ret_array['html_title'] = $row->html_title; 
+               }
+
+               return $ret_array;
+            } else{
+                return FALSE;
+            }
+        } catch (Exception $ex) {
+            return FALSE;
+        }
+    }
+
+    function updatepage($data,$id){
+        $this->db->where('id', $id);
+        if ($this->db->update('static_pages', $data)) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
 }
     
