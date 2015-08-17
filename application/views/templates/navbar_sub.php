@@ -42,8 +42,8 @@
         </li>
         <li class="dropdown <?php if($navbar == 'flyers'){ echo "active";} ?>"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-picture-o fa-2x"></i><span>Flyers</span>
           <ul class="dropdown-menu">
-            <li><a href="#">List Flyers</a></li>
-            <li><a href="#">Add Flyer</a></li>
+            <li><a href="<?php echo base_url('index.php/flyer/ListFlyers'); ?>">List Flyers</a></li>
+            <li><a href="<?php echo base_url('index.php/flyer/AddFlyer'); ?>">Add Flyer</a></li>
           </ul>
         </li>
         <li class="dropdown <?php if($navbar == 'advertising'){ echo "active";} ?>"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bullhorn fa-2x"></i><span>Advertising</span>

@@ -454,3 +454,8 @@ margin-bottom: 26px;}
 .table-wrapper {
     padding: 10px;
 }
+
+.imagetable{
+    max-height: 100px;
+    max-width: 100px;
+}

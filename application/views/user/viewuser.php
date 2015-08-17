@@ -53,9 +53,6 @@
               </div>
             </div> 
             
-
-
-            <?php } ?>
             </div>
 		</div>
 	
@@ -64,13 +61,14 @@
       <div class="col-md-8">
         <div class="form-inline">
           <div class="form-group">
-            <a href='' class="btn btn-success"><i class="fa fa-pencil-square-o"></i> Edit User</a>
+            <a href='<?php echo base_url('index.php/user/EditUser/'.$row->id); ?>' class="btn btn-success"><i class="fa fa-pencil-square-o"></i> Edit User</a>
           </div>
           <div class="form-group">
-            <a href='' class="btn btn-danger"><i class="fa fa-trash-o"></i> Delete User</a>
+            <a href='<?php echo base_url('index.php/user/DeleteUser/'.$row->id); ?>' onclick="return confirm('Are you sure you want to permenantly delete this user?   you cannot recover this user profile after you delete');" class="btn btn-danger"><i class="fa fa-trash-o"></i> Delete User</a>
           </div>
         </div>
       </div>
     </div>
+    <?php } ?>
     <?php } ?>
 </div>

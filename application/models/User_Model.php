@@ -246,6 +246,16 @@ class User_model extends CI_Model {
         }
     }
 
+    function getcitybyid($id){
+        try{
+            $query = $this->db->query("SELECT name FROM cities WHERE id='$id' LIMIT 1");
+            $row = $query->row();
+            return $row->name;
+        } catch (Exception $ex) {
+            return FALSE;
+        }
+    }
+
     //State Functions
     public function liststates(){
         $this->db->select('*');
@@ -260,7 +270,7 @@ class User_model extends CI_Model {
         }
     }
 
-     public function addstate($state) {
+    public function addstate($state) {
 
         $name = $state['name'] ;
         $sql = "SELECT * FROM states WHERE name ='$name'";
@@ -351,6 +361,63 @@ class User_model extends CI_Model {
         if ($this->db->update('static_pages', $data)) {
             return TRUE;
         } else {
+            return FALSE;
+        }
+    }
+
+    //Flyers
+    public function addflyers($flyers) {
+
+        $title = $flyers['title'] ;
+        $sql = "SELECT * FROM flyers WHERE title ='$title'";
+        $query = $this->db->query($sql);
+        //Check if Username or Password Exists
+        if ($query->num_rows() == 0){
+            if ($this->db->insert('flyers', $flyers)) {
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else{
+            return FALSE;
+        }
+        
+    }
+
+    public function listflyers(){
+       $query = $this->db->query("SELECT f.id,f.title,f.description,c.name,f.updated,f.image FROM flyers f, categories c WHERE c.id = f.category ORDER BY f.updated desc");
+
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return FALSE;
+        }
+    }
+
+    function viewflyer($id){
+        try{
+            $query = $this->db->query("SELECT f.id,f.title,f.description,c.name,f.updated,f.image,f.website,f.display,f.city FROM flyers f, categories c WHERE c.id = f.category AND f.id='$id' LIMIT 1");
+            if ($query->num_rows() > 0)
+            {
+                $ret_array = array();
+               foreach ($query->result() as $row)
+               {
+                  $ret_array['id'] = $row->id; 
+                  $ret_array['title'] = $row->title; 
+                  $ret_array['description'] = $row->description; 
+                  $ret_array['name'] = $row->name; 
+                  $ret_array['image'] = $row->image;
+                  $ret_array['city'] = $row->city; 
+                  $ret_array['updated'] = $row->updated; 
+                  $ret_array['website'] = $row->website; 
+                  $ret_array['display'] = $row->display;
+               }
+
+               return $ret_array;
+            } else{
+                return FALSE;
+            }
+        } catch (Exception $ex) {
             return FALSE;
         }
     }
